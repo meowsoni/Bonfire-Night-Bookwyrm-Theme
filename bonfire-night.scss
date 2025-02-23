@@ -1,0 +1,239 @@
+@import "../vendor/bulma/sass/utilities/initial-variables";
+
+/* Font
+ ******************************************************************************/
+
+/* Regular */
+@font-face {
+  font-family: 'Lora';
+  src: url('../../fonts/lora/Lora-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'Lora';
+  src: url('../../fonts/lora/Lora-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* make sure the included Lora font is imported to the directory above */
+/* comment out the font section above if using default font */
+
+/* Colors
+ ******************************************************************************/
+
+/* states */
+$primary: #d67f4b;
+$primary-light: #2c1b13;
+$info: #2a4b73;
+$success: #35845b;
+$success-light: #14291d;
+$warning: #c8913b;
+$warning-light: #4a3618;
+$danger: #a54242;
+$danger-light: #5a1f1f;
+$light: #4a4a4a;
+$red: #ff9f9f;
+$black: #000;
+$white-ter: hsl(0deg, 0%, 92%);
+
+/* book cover standins */
+$no-cover-color: #06253f;
+
+/* background colors */
+$scheme-main: #1a1e22;
+$scheme-invert: #fff;
+$scheme-main-bis: #1f2328;
+$scheme-main-ter: #22262b;
+$background-body: #141618;
+$background-secondary: #1a1e22;
+$background-tertiary: #20242a;
+$modal-background-background-color: rgba($black, 0.85);
+$scrollbar-track: $background-secondary;
+$scrollbar-thumb: $light;
+
+/* highlight colors */
+$primary-highlight: lighten($primary, 10%);
+$info-highlight: lighten($info, 10%);
+$success-highlight: lighten($success, 10%);
+
+/* borders */
+$border: #2e3336;
+$border-light: #51595d;
+$border-hover: #646a6e;
+
+/* text */
+$text: #e6e0d6;
+$text-light: #d6cab8;
+$text-strong: #f0e7db;
+
+/* links */
+$link: #ff9e57;
+$link-background: $background-tertiary;
+$link-hover: lighten($link, 18%);
+$link-hover-border: #ffbe82;
+$link-focus: lighten($link, 20%);
+$link-active: darken($link, 10%);
+$link-light: #ffaf73;
+
+/* bulma overrides */
+$body-background-color: $background-body;
+$background: $background-secondary;
+$menu-item-active-background-color: $link-background;
+$navbar-dropdown-item-hover-color: $white;
+$info-light: $background-body;
+$info-dark: #527ba9;
+
+/* These elements' colors are hardcoded, probably a bug in Bulma? */
+@media screen and (min-width: 769px) {
+  .navbar-dropdown {
+    box-shadow: 0 8px 12px rgba($black, 0.3) !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-menu {
+    box-shadow: 0 8px 12px rgba($black, 0.3) !important;
+  }
+}
+
+/* Misc */
+$shadow: 0 0.5em 0.5em -0.125em rgba($black, 0.3), 0 0 0 1px rgba($black, 0.05);
+$card-header-shadow: 0 0.125em 0.25em rgba($black, 0.15);
+$invisible-overlay-background-color: rgba($black, 0.75);
+$progress-value-background-color: $border-light;
+
+/* Glow effect for Bonfire */
+.button, .tag, .notification {
+  box-shadow: 0 0 12px rgba($primary, 0.3);
+}
+
+a:hover {
+  text-shadow: 0 0 12px rgba($link, 0.7);
+}
+
+.card, .box {
+  box-shadow: 0 0 15px rgba($primary, 0.2);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0 0 10px rgba($primary, 0.25);
+}
+
+/* Fonts */
+$family-primary: 'Lora', sans-serif;
+$family-secondary: 'Lora', sans-serif;
+
+/* change if using default fonts */
+
+.has-text-muted {
+  color: $grey-lighter !important;
+}
+
+.has-text-more-muted {
+  color: $grey-light !important;
+}
+
+.tabs li:not(.is-active) a {
+  color: #ff9e57 !important;
+}
+
+.tabs li:not(.is-active) a:hover {
+  border-bottom-color: #ffbe82 !important;
+}
+
+.tabs li.is-active a {
+  color: #f0e7db !important;
+  border-bottom-color: #f0e7db !important;
+}
+
+/* QR Code Background */
+#qrcode svg {
+  background-color: #b5a18c;
+}
+
+/* Bonfire Night Starfield Background
+   -----------------------------------------------------------------------------
+   setting $background-body to transparent
+   then using pseudo-elements for twinkling stars animation
+----------------------------------------------------------------------------- */
+
+$background-body: transparent;
+
+body {
+  background-color: $background-body;
+  position: relative;
+  overflow: hidden;
+}
+
+// small stars layer via body::before
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  // base dot for small stars
+  background: black; // fallback
+  width: 1px;
+  height: 1px;
+  box-shadow:
+    50px 80px white,
+    150px 40px white,
+    250px 120px white,
+    350px 60px white,
+    450px 180px white,
+    550px 100px white,
+    650px 200px white,
+    750px 150px white,
+    850px 90px white,
+    950px 130px white,
+    1050px 70px white,
+    1150px 110px white;
+  animation: twinkle-small 3s infinite alternate;
+}
+
+// larger stars layer via body::after (adds size variation)
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow:
+    100px 300px white,
+    300px 250px white,
+    500px 350px white,
+    700px 400px white,
+    900px 320px white,
+    1100px 280px white,
+    1300px 360px white,
+    1500px 300px white;
+  animation: twinkle-large 4s infinite alternate;
+}
+
+@keyframes twinkle-small {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes twinkle-large {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.5; }
+}
+
+/* Import necessary styles */
+@import "../bookwyrm";
+@import "../vendor/icons.css";
+@import "../vendor/shepherd";
